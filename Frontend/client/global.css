@@ -1,0 +1,132 @@
+/** @import must precede all other statements */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Tailwind CSS theme
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * A different format will require also updating the theme in tailwind.config.ts.
+  */
+  :root {
+    /* Light theme: clean grayscale with deep blue primary and neon teal accents */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 222 85% 48%; /* deep tech blue */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 172 84% 45%; /* neon teal */
+    --accent-foreground: 222 47% 12%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 172 84% 45%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar (used by some UI components) */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 6% 26%;
+    --sidebar-primary: 222 85% 48%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 240 6% 26%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 172 84% 45%;
+  }
+
+  .dark {
+    /* Dark theme: deep navy with neon accents */
+    --background: 222 50% 6%;
+    --foreground: 210 40% 96%;
+
+    --card: 222 50% 8%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 222 50% 8%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 220 90% 60%;
+    --primary-foreground: 222 47% 12%;
+
+    --secondary: 220 18% 18%;
+    --secondary-foreground: 210 40% 96%;
+
+    --muted: 220 18% 18%;
+    --muted-foreground: 214 18% 70%;
+
+    --accent: 172 90% 55%;
+    --accent-foreground: 222 47% 12%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 18% 20%;
+    --input: 220 18% 20%;
+    --ring: 172 90% 55%;
+
+    --sidebar-background: 222 50% 6%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 220 90% 60%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 220 18% 14%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 220 18% 20%;
+    --sidebar-ring: 172 90% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+      Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji",
+      "Segoe UI Emoji";
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background-image: linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .neon-border {
+    box-shadow: 0 0 0 1px hsl(var(--accent) / 0.4), 0 0 24px hsl(var(--accent) / 0.3);
+  }
+  .glow {
+    text-shadow: 0 0 16px hsl(var(--accent) / 0.6);
+  }
+  .bg-grid {
+    background-image: linear-gradient(hsl(var(--foreground)/0.06) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--foreground)/0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: -1px -1px;
+  }
+}
