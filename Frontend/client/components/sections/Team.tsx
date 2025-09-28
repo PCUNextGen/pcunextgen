@@ -15,7 +15,7 @@ const team: Member[] = [
     github: "#"
   },
   {
-    name: "Dr.Renu Dadange",
+    name: "Dr.Renu Dandge",
     role: "Research Head",
     image: "#",
     linkedin: "#",
