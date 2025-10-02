@@ -3,25 +3,48 @@
 import { FormEvent, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useRef } from "react";
+import { submitJoinRequest, type JoinRequest } from "../../../shared/api";
 
 export default function Join() {
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(null);
 
-    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+    const formData = new FormData(e.currentTarget);
+    const data: Omit<JoinRequest, 'id' | 'status' | 'created_at' | 'updated_at'> = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      interest: formData.get('interest') as JoinRequest['interest'],
+      message: formData.get('message') as string,
+      consent: formData.get('consent') === 'on'
+    };
+
     console.log("Join form submission", data);
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    setIsLoading(false);
-    setSubmitted(true);
+    try {
+      const result = await submitJoinRequest(data);
+      
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        setError(result.message || 'Failed to submit join request');
+        if (result.errors) {
+          const errorMessages = result.errors.map(err => err.message).join(', ');
+          setError(errorMessages);
+        }
+      }
+    } catch (error) {
+      setError('Network error. Please check if the backend is running.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // Animation variants (No changes here, kept for completeness)
@@ -259,6 +282,17 @@ export default function Join() {
                     >
                       Start Your Journey
                     </motion.h3>
+
+                    {/* Error Message */}
+                    {error && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm"
+                      >
+                        {error}
+                      </motion.div>
+                    )}
 
                     <div className="grid gap-6 sm:grid-cols-2">
                       <motion.div variants={inputVariants}>

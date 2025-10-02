@@ -9,7 +9,7 @@ const rateLimit = require('express-rate-limit');
 const joinRoutes = require('./routes/joinRoutes');
 
 // Import middleware (we'll create these next)
-const errorHandler = require('./middleware/errorHandler');
+const { errorHandler } = require('./middleware/errorHandler');
 
 // Create Express app
 const app = express();
