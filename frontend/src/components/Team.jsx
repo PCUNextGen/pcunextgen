@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import SectionWrapper from './SectionWrapper';
 
 const teamMembers = [
@@ -29,31 +29,38 @@ const teamMembers = [
   },
 ];
 
-const textVariant = {
-  hidden: { y: 20, opacity: 0 },
-  show: { y: 0, opacity: 1, transition: { type: "spring", duration: 0.8 } }
-};
-
-const cardVariant = {
-  hidden: { y: 50, opacity: 0, scale: 0.9 },
-  show: { y: 0, opacity: 1, scale: 1, transition: { type: "spring", stiffness: 100, duration: 0.8 } }
-};
-
-const containerVariant = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2
-    }
-  }
-};
-
 const Team = () => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+
+  // Enhanced animation variants with scroll triggers
+  const textVariant = {
+    hidden: { y: 30, opacity: 0 },
+    show: { y: 0, opacity: 1, transition: { type: "spring", duration: 0.8, stiffness: 100 } }
+  };
+
+  const cardVariant = {
+    hidden: { y: 60, opacity: 0, scale: 0.85, rotateX: 15 },
+    show: { y: 0, opacity: 1, scale: 1, rotateX: 0, transition: { type: "spring", stiffness: 80, duration: 0.8 } }
+  };
+
+  const containerVariant = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
   return (
-    <section className="py-20 bg-light-primary dark:bg-dark-primary relative overflow-hidden">
-      {/* Professional Background Elements */}
+    <section 
+      ref={ref}
+      className="py-20 bg-light-primary dark:bg-dark-primary relative overflow-hidden"
+    >
+      {/* Enhanced Professional Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div 
           initial={{ scale: 1, opacity: 0.03 }}
@@ -76,17 +83,17 @@ const Team = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        {/* Professional Header */}
+        {/* Enhanced Professional Header with Scroll Animation */}
         <motion.div 
           initial="hidden"
-          animate="show"
+          animate={isInView ? "show" : "hidden"}
           variants={textVariant}
           className="text-center mb-20"
         >
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: -20, scale: 0.8 }}
+            animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: -20, scale: 0.8 }}
+            transition={{ duration: 0.6, type: "spring", stiffness: 120 }}
             className="inline-block mb-6"
           >
             <span className="px-4 py-2 bg-light-accent dark:bg-dark-accent text-accent dark:text-accent-light rounded-full text-sm font-semibold border border-accent/20 dark:border-accent/30 backdrop-blur-sm">
@@ -96,44 +103,44 @@ const Team = () => {
 
           <h2 className="text-5xl md:text-6xl font-bold mb-8">
             <motion.span 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-text-light-primary dark:text-text-dark-primary"
+              initial={{ opacity: 0, x: -40, rotateY: -15 }}
+              animate={isInView ? { opacity: 1, x: 0, rotateY: 0 } : { opacity: 0, x: -40, rotateY: -15 }}
+              transition={{ delay: 0.2, duration: 0.8, type: "spring", stiffness: 80 }}
+              className="inline-block text-text-light-primary dark:text-text-dark-primary"
             >
               Meet Our{' '}
             </motion.span>
             <motion.span 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-accent dark:text-accent-light"
+              initial={{ opacity: 0, x: 40, rotateY: 15 }}
+              animate={isInView ? { opacity: 1, x: 0, rotateY: 0 } : { opacity: 0, x: 40, rotateY: 15 }}
+              transition={{ delay: 0.4, duration: 0.8, type: "spring", stiffness: 80 }}
+              className="inline-block text-accent dark:text-accent-light"
             >
               Team
             </motion.span>
           </h2>
           
           <motion.div 
-            initial={{ width: 0 }}
-            animate={{ width: 96 }}
-            transition={{ duration: 1, delay: 0.6 }}
+            initial={{ width: 0, opacity: 0 }}
+            animate={isInView ? { width: 96, opacity: 1 } : { width: 0, opacity: 0 }}
+            transition={{ duration: 1, delay: 0.6, ease: "easeInOut" }}
             className="h-1 bg-accent dark:bg-accent-light mx-auto rounded-full mb-6"
           />
 
           <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
             className="text-xl text-text-light-secondary dark:text-text-dark-secondary max-w-3xl mx-auto font-light"
           >
             The passionate individuals driving innovation and excellence at Nextgen Innovation Club
           </motion.p>
         </motion.div>
 
-        {/* Team Grid */}
+        {/* Enhanced Team Grid with Advanced Scroll Animation */}
         <motion.div 
           initial="hidden"
-          animate="show"
+          animate={isInView ? "show" : "hidden"}
           variants={containerVariant}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
         >
@@ -142,28 +149,37 @@ const Team = () => {
               key={index} 
               variants={cardVariant}
               whileHover={{ 
-                y: -12,
+                y: -15,
+                scale: 1.02,
+                rotateY: 3,
                 transition: { type: "spring", stiffness: 400, damping: 25 }
               }}
               className="group relative"
             >
-              {/* Card Background with Gradient Border */}
-              <div className="absolute -inset-0.5 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition duration-700 rounded-3xl blur" 
-                   style={{
-                     background: `linear-gradient(135deg, ${member.color.split(' ')[1]}, ${member.color.split(' ')[3]})`
-                   }}>
-              </div>
+              {/* Enhanced Card Background with Gradient Border */}
+              <motion.div 
+                className="absolute -inset-0.5 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-700"
+                style={{
+                  background: `linear-gradient(135deg, ${member.color.split(' ')[1]}, ${member.color.split(' ')[3]})`
+                }}
+                animate={{
+                  rotate: [0, 1, 0],
+                }}
+                transition={{ duration: 6, repeat: Infinity, delay: index * 0.5 }}
+              />
               
               <div className="relative bg-light-secondary dark:bg-dark-secondary rounded-3xl p-8 shadow-soft dark:shadow-glow hover:shadow-soft-lg transition-all duration-500 border border-light-accent dark:border-dark-accent backdrop-blur-sm h-full">
                 
-                {/* Avatar Section */}
+                {/* Enhanced Avatar Section with Scroll Animation */}
                 <div className="text-center mb-6">
                   <motion.div 
+                    initial={{ scale: 0, rotate: -90 }}
+                    animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -90 }}
+                    transition={{ delay: 0.2 + index * 0.1, duration: 0.8, type: "spring", stiffness: 150 }}
                     whileHover={{ 
                       scale: 1.05,
-                      rotate: [0, -2, 2, 0]
+                      rotate: [0, -3, 3, 0]
                     }}
-                    transition={{ type: "spring", stiffness: 300 }}
                     className="relative inline-block"
                   >
                     <div className={`w-24 h-24 md:w-28 md:h-28 bg-gradient-to-r ${member.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 mx-auto`}>
@@ -178,39 +194,56 @@ const Team = () => {
                       </motion.span>
                     </div>
                     
-                    {/* Floating Accent */}
+                    {/* Enhanced Floating Accent */}
                     <motion.div 
-                      initial={{ scaleX: 0 }}
-                      whileHover={{ scaleX: 1 }}
-                      transition={{ duration: 0.3 }}
+                      initial={{ scaleX: 0, opacity: 0 }}
+                      whileHover={{ scaleX: 1, opacity: 1 }}
+                      transition={{ duration: 0.4 }}
                       className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-accent dark:bg-accent-light rounded-full origin-center"
                     />
                   </motion.div>
                 </div>
                 
-                {/* Member Info */}
-                <div className="text-center mb-6">
+                {/* Enhanced Member Info with Scroll Animation */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ delay: 0.4 + index * 0.1, duration: 0.6 }}
+                  className="text-center mb-6"
+                >
                   <motion.h3 
-                    whileHover={{ scale: 1.02 }}
+                    whileHover={{ scale: 1.02, x: 2 }}
                     className="text-xl md:text-2xl font-bold text-text-light-primary dark:text-text-dark-primary mb-2 group-hover:text-accent dark:group-hover:text-accent-light transition-colors duration-300"
                   >
                     {member.name}
                   </motion.h3>
                   
-                  <div className="inline-block px-3 py-1 bg-accent/10 dark:bg-accent/20 text-accent dark:text-accent-light rounded-full text-sm font-semibold mb-4 border border-accent/20 dark:border-accent/30">
+                  <motion.div 
+                    whileHover={{ scale: 1.05 }}
+                    className="inline-block px-3 py-1 bg-accent/10 dark:bg-accent/20 text-accent dark:text-accent-light rounded-full text-sm font-semibold mb-4 border border-accent/20 dark:border-accent/30"
+                  >
                     {member.role}
-                  </div>
+                  </motion.div>
                   
                   <p className="text-text-light-secondary dark:text-text-dark-secondary text-sm leading-relaxed">
                     {member.description}
                   </p>
-                </div>
+                </motion.div>
 
-                {/* Social Links */}
-                <div className="pt-6 border-t border-accent/10 dark:border-accent/20">
+                {/* Enhanced Social Links with Scroll Animation */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ delay: 0.6 + index * 0.1, duration: 0.6 }}
+                  className="pt-6 border-t border-accent/10 dark:border-accent/20"
+                >
                   <div className="flex justify-center space-x-4">
                     <motion.div 
-                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      whileHover={{ 
+                        scale: 1.15, 
+                        rotate: [0, 10, -10, 0],
+                        transition: { duration: 0.5 }
+                      }}
                       className="w-10 h-10 bg-accent/10 dark:bg-accent/20 rounded-xl flex items-center justify-center hover:bg-accent/20 dark:hover:bg-accent/30 transition-all duration-300 cursor-pointer group/social"
                     >
                       <svg className="w-5 h-5 text-accent dark:text-accent-light group-hover/social:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -219,7 +252,11 @@ const Team = () => {
                     </motion.div>
                     
                     <motion.div 
-                      whileHover={{ scale: 1.1, rotate: -5 }}
+                      whileHover={{ 
+                        scale: 1.15, 
+                        rotate: [0, -10, 10, 0],
+                        transition: { duration: 0.5 }
+                      }}
                       className="w-10 h-10 bg-accent/10 dark:bg-accent/20 rounded-xl flex items-center justify-center hover:bg-accent/20 dark:hover:bg-accent/30 transition-all duration-300 cursor-pointer group/social"
                     >
                       <svg className="w-5 h-5 text-accent dark:text-accent-light group-hover/social:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -227,18 +264,27 @@ const Team = () => {
                       </svg>
                     </motion.div>
                   </div>
-                </div>
+                </motion.div>
 
-                {/* Hover Effect Particles */}
+                {/* Enhanced Hover Effect Particles */}
                 <motion.div 
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileHover={{ 
+                    opacity: [0, 1, 0],
+                    scale: [0, 1.2, 0],
+                    y: [-10, -20, -30]
+                  }}
+                  transition={{ duration: 1, repeat: Infinity, repeatDelay: 0.5 }}
                   className="absolute top-4 right-4 w-2 h-2 bg-accent rounded-full"
                 />
                 <motion.div 
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{ delay: 0.1 }}
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileHover={{ 
+                    opacity: [0, 1, 0],
+                    scale: [0, 1, 0],
+                    y: [-5, -15, -25]
+                  }}
+                  transition={{ duration: 1.2, repeat: Infinity, repeatDelay: 0.7, delay: 0.2 }}
                   className="absolute top-6 right-8 w-1 h-1 bg-accent-light rounded-full"
                 />
               </div>
@@ -246,25 +292,38 @@ const Team = () => {
           ))}
         </motion.div>
 
-        {/* Call to Action */}
+        {/* Enhanced Call to Action with Scroll Animation */}
         <motion.div
-          initial="hidden"
-          animate="show"
-          variants={textVariant}
+          initial={{ opacity: 0, y: 30, scale: 0.9 }}
+          animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 30, scale: 0.9 }}
+          transition={{ delay: 1, duration: 0.8, type: "spring", stiffness: 100 }}
           className="text-center mt-16"
         >
           <motion.div 
-            whileHover={{ scale: 1.02 }}
-            className="inline-flex items-center space-x-3 px-6 py-3 bg-light-accent dark:bg-dark-accent rounded-full border border-accent/20 dark:border-accent/30"
+            whileHover={{ 
+              scale: 1.02, 
+              y: -2,
+              boxShadow: "0 10px 30px rgba(6, 182, 212, 0.15)"
+            }}
+            className="inline-flex items-center space-x-3 px-6 py-3 bg-light-accent dark:bg-dark-accent rounded-full border border-accent/20 dark:border-accent/30 cursor-pointer"
           >
-            <span className="text-text-light-secondary dark:text-text-dark-secondary font-medium">
-              Want to join our leadership team?
-            </span>
-            <motion.div
-              animate={{ x: [0, 4, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
+            <motion.span 
+              whileHover={{ x: 2 }}
+              className="text-text-light-secondary dark:text-text-dark-secondary font-medium"
             >
-              <span className="text-accent dark:text-accent-light font-semibold">Get involved</span>
+              Want to join our leadership team?
+            </motion.span>
+            <motion.div
+              animate={{ x: [0, 5, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="group-hover:animate-none"
+            >
+              <motion.span 
+                whileHover={{ scale: 1.05 }}
+                className="text-accent dark:text-accent-light font-semibold"
+              >
+                Get involved
+              </motion.span>
             </motion.div>
           </motion.div>
         </motion.div>

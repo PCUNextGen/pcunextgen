@@ -35,10 +35,10 @@ const Hero = () => {
   
   const texts = [
     'AI innovators',
-    'tech enthusiasts',
-    'future leaders',
-    'problem solvers',
-    'creative minds'
+    'Tech enthusiasts',
+    'Future leaders',
+    'Problem solvers',
+    'Creative minds'
   ];
 
   useEffect(() => {
