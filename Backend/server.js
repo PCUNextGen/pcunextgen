@@ -51,6 +51,8 @@ app.get('/health', (req, res) => {
 
 // API Routes
 app.use('/api/join', joinRoutes);
+const eventRoutes = require('./routes/eventRoutes');
+app.use('/api/event', eventRoutes);
 
 // Welcome route
 app.get('/api', (req, res) => {

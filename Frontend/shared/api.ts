@@ -62,6 +62,41 @@ export interface InterestStat {
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
 
 /**
+ * Event registration types and API functions
+ */
+export interface EventRegistration {
+  id?: number;
+  name: string;
+  email: string;
+  event: string;
+  message?: string;
+  created_at?: string;
+}
+
+/**
+ * Submit an event registration
+ */
+export async function submitEventRegistration(data: Omit<EventRegistration, 'id' | 'created_at'>): Promise<ApiResponse<EventRegistration>> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/event/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    return {
+      success: false,
+      message: 'Network error occurred',
+      error: error instanceof Error ? error.message : 'Unknown error'
+    };
+  }
+}
+
+/**
  * Submit a join request
  */
 export async function submitJoinRequest(data: Omit<JoinRequest, 'id' | 'status' | 'created_at' | 'updated_at'>): Promise<ApiResponse<JoinRequest>> {
