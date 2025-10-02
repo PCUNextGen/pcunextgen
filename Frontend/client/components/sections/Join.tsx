@@ -66,7 +66,7 @@ export default function Join() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: "easeOut",
+        ease: ["easeOut"],
       },
     },
   };
@@ -95,7 +95,7 @@ export default function Join() {
       x: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut",
+        ease: ["easeOut"],
       },
     },
   };

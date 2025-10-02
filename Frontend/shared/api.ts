@@ -5,6 +5,17 @@
  */
 
 /**
+ * Extend ImportMeta to include env property for Vite
+ */
+interface ImportMetaEnv {
+  VITE_API_BASE_URL?: string;
+}
+
+interface ImportMeta {
+  env: ImportMetaEnv;
+}
+
+/**
  * Example response type for /api/demo
  */
 export interface DemoResponse {
