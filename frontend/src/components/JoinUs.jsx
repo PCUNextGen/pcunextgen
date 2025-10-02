@@ -440,10 +440,10 @@ const JoinUs = () => {
                     Questions? Contact us at{' '}
                     <motion.a 
                       whileHover={{ scale: 1.05, y: -1 }}
-                      href="mailto:nextgen@pccoe.edu" 
+                      href="mailto:nextgen@pcu.edu.in" 
                       className="text-accent dark:text-accent-light hover:text-accent-hover font-semibold transition-colors duration-300"
                     >
-                      nextgen@pcu.edu.in
+                      nextgen.pcu25@gmail.com
                     </motion.a>
                   </p>
                 </motion.div>
