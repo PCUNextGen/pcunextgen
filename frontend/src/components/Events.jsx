@@ -368,12 +368,13 @@ const Events = () => {
             className="text-text-light-secondary dark:text-text-dark-secondary"
           >
             Questions?{' '}
-            <motion.span 
+            <motion.a 
               whileHover={{ x: 3, scale: 1.05 }}
-              className="text-accent dark:text-accent-light font-semibold cursor-pointer"
+              href="mailto:nextgen.pcu25@gmail.com"
+              className="text-accent dark:text-accent-light font-semibold cursor-pointer hover:text-accent-hover transition-colors duration-300"
             >
               Contact us
-            </motion.span>
+            </motion.a>
           </motion.p>
         </motion.div>
       </div>

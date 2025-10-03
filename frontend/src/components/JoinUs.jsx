@@ -307,7 +307,7 @@ const JoinUs = () => {
                           onBlur={() => setFocusedField('')}
                           required
                           className="w-full p-4 rounded-xl bg-light-primary dark:bg-dark-primary text-text-light-primary dark:text-text-dark-primary border-2 border-light-accent dark:border-dark-accent focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-300"
-                          placeholder="your.email@pccoe.edu"
+                          placeholder="your.email@pcu.edu.in"
                         />
                         <motion.div
                           initial={{ scaleX: 0 }}
@@ -336,10 +336,10 @@ const JoinUs = () => {
                         className="w-full p-4 rounded-xl bg-light-primary dark:bg-dark-primary text-text-light-primary dark:text-text-dark-primary border-2 border-light-accent dark:border-dark-accent focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-300"
                       >
                         <option value="">Select Year</option>
-                        <option value="1st">First Year (FE)</option>
-                        <option value="2nd">Second Year (SE)</option>
-                        <option value="3rd">Third Year (TE)</option>
-                        <option value="4th">Fourth Year (BE)</option>
+                        <option value="1st">First Year </option>
+                        <option value="2nd">Second Year </option>
+                        <option value="3rd">Third Year </option>
+                        <option value="4th">Fourth Year </option>
                       </select>
                     </motion.div>
                     
@@ -440,7 +440,7 @@ const JoinUs = () => {
                     Questions? Contact us at{' '}
                     <motion.a 
                       whileHover={{ scale: 1.05, y: -1 }}
-                      href="mailto:nextgen@pcu.edu.in" 
+                      href="mailto:nextgen.pcu25@gmail.com" 
                       className="text-accent dark:text-accent-light hover:text-accent-hover font-semibold transition-colors duration-300"
                     >
                       nextgen.pcu25@gmail.com
