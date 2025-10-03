@@ -14,8 +14,6 @@ export default function EventRegister() {
     const data = {
       name: formData.get('name'),
       email: formData.get('email'),
-      event: formData.get('event'),
-      message: formData.get('message'),
     };
 
     try {
@@ -27,7 +25,6 @@ export default function EventRegister() {
         body: JSON.stringify(data),
       });
       const result = await response.json();
-      
       if (result.success) {
         setSubmitted(true);
       } else {
@@ -76,7 +73,6 @@ export default function EventRegister() {
             className="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 placeholder-gray-400 bg-white/80 backdrop-blur-sm" 
           />
         </div>
-        
         <div className="space-y-1">
           <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
           <input 
@@ -85,27 +81,6 @@ export default function EventRegister() {
             placeholder="your.email@example.com" 
             required 
             className="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 placeholder-gray-400 bg-white/80 backdrop-blur-sm" 
-          />
-        </div>
-        
-        <div className="space-y-1">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Event Name</label>
-          <input 
-            name="event" 
-            type="text" 
-            placeholder="Which event are you interested in?" 
-            required 
-            className="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 placeholder-gray-400 bg-white/80 backdrop-blur-sm" 
-          />
-        </div>
-        
-        <div className="space-y-1">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Message (Optional)</label>
-          <textarea 
-            name="message" 
-            placeholder="Tell us why you're excited to join this event..." 
-            rows="4"
-            className="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 placeholder-gray-400 bg-white/80 backdrop-blur-sm resize-none" 
           />
         </div>
         
