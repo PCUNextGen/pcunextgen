@@ -1,4 +1,4 @@
-import EventRegister from '../../client/components/sections/EventRegister';
+import EventRegister from '../components/sections/EventRegister.jsx';
 
 export default function RegisterNowPage() {
   return <EventRegister />;

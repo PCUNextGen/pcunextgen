@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion, useInView } from 'framer-motion';
-import EventRegister from './sections/EventRegister';
+import EventRegister from './sections/EventRegister.jsx';
 
 const Events = () => {
   const ref = React.useRef(null);
