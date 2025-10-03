@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useInView } from 'framer-motion';
 import EventRegister from './sections/EventRegister';
 
 const Events = () => {
