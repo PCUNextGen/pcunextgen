@@ -445,19 +445,6 @@ export default function Join() {
       </div>
 
       {/* Add CSS for gradient animation */}
-      <style jsx global>{`
-        @keyframes gradient {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        .animate-gradient {
-          animation: gradient 3s ease infinite;
-        }
-        .bg-300% {
-          background-size: 300% 300%;
-        }
-      `}</style>
     </section>
   );
 }

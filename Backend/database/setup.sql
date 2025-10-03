@@ -38,4 +38,19 @@ INSERT INTO join_requests (
     TRUE
 );
 
+-- Create event_registrations table
+CREATE TABLE IF NOT EXISTS event_registrations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    event VARCHAR(255) NOT NULL,
+    message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create indexes for event_registrations
+CREATE INDEX idx_event_email ON event_registrations(email);
+CREATE INDEX idx_event_name ON event_registrations(event);
+CREATE INDEX idx_event_created_at ON event_registrations(created_at);
+
 SELECT 'Database setup completed successfully!' as message;
