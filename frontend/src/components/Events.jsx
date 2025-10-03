@@ -370,7 +370,7 @@ const Events = () => {
             Questions?{' '}
             <motion.a 
               whileHover={{ x: 3, scale: 1.05 }}
-              href="mailto:nextgen.pcu25@gmail.com"
+              href="mailto:nextgen@pcu.edu.in"
               className="text-accent dark:text-accent-light font-semibold cursor-pointer hover:text-accent-hover transition-colors duration-300"
             >
               Contact us
